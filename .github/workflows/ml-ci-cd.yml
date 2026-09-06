@@ -42,7 +42,10 @@ jobs:
       - name: Run Automated Tests
         run: |
           pytest
-
+      - name: Code Quality Check
+        run: |
+          flake8 train.py predict.py test_model.py
+          
       - name: Test Prediction
         run: |
           python -c "import pickle; model=pickle.load(open('model.pkl','rb')); prediction=model.predict([[8.5,92,85,3,1]]); print('Prediction:', prediction[0]); assert prediction[0] in [0,1]"
